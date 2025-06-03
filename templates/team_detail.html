@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="mb-4">{{ team.name }} Depth Chart</h2>
+
+  {% for position, players in grouped.items() %}
+    <div class="card mb-4">
+      <div class="card-header bg-dark text-white">
+        <strong>{{ position }}</strong>
+      </div>
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Depth</th>
+            <th>Name</th>
+            <th>NIL Value (M)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players %}
+            <tr>
+              <td>{{ player.depth }}</td>
+              <td>
+                <a href="{{ url_for('player_detail', player_id=player.id) }}">
+                  {{ player.name }}
+                </a>
+              </td>
+              <td>${{ "%.2f"|format(player.nil_value) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">← Back to Teams</a>
+{% endblock %}

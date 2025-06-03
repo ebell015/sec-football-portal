@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="mb-4">{{ player.name }}</h2>
+
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <strong>{{ player.position }}</strong> — {{ player.team.name }}
+    </div>
+    <div class="card-body">
+      <p><strong>Depth:</strong> {{ player.depth }}</p>
+      <p><strong>NIL Value:</strong> ${{ "%.2f"|format(player.nil_value) }}M</p>
+    </div>
+  </div>
+
+  <a href="{{ url_for('team_detail', team_id=player.team_id) }}" class="btn btn-secondary mt-3">← Back to Team</a>
+{% endblock %}
